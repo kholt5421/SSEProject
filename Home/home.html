@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="index.js"></script>
+        <script src="../index.js"></script>
         <script>
             function viewProfile(){
-                if(user.loggedIn == false){
+                if(loggedIn == false){ //If the player is not logged in tell them and return
                     alert("You must be logged in to view your profile.");
                     return;
                 }
+                //If they are, take them to their profile
+                window.location.href = "profile.html";
             }
         </script>
         <style>
@@ -32,8 +34,8 @@
         <div class="menu">
             <h1>Spoof Call and Malware Simulator<br>(SCAMS)</h1>
             <button class="selection">Play</button><br>
-            <button class="selection">Login</button><br>
-            <button class="selection">Create Account</button><br>
+            <button class="selection" onclick="window.location.href = 'login.html'">Login</button><br>
+            <button class="selection" onclick="window.location.href = 'create.html'">Create Account</button><br>
             <button class="selection">View Scoreboard</button><br>
             <button class="selection" onclick="viewProfile()">View Profile</button><br>
         </div>
