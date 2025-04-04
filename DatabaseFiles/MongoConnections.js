@@ -1,5 +1,5 @@
-const fs = require("fs");
-const { MongoClient } = require("mongodb");
+import fs from "fs";
+import { MongoClient } from "mongodb";
 
 const uri = "mongodb+srv://SSEconnection:RememberThis@cluster0.3jlg2.mongodb.net/";
 const client = new MongoClient(uri);
