@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../index.js"></script>
+        <script src="../DatabaseFiles/MongoConnections.js"></script>
+        <script>
+            function createAccount(){
+                //Get data from form
+                var information = document.getElementById("information");
+                //Make sure the user filled out every field
+                for(let i = 0; i < 3; i++){
+                    //If they didn't fill out the form, tell the user and return
+                    if(information.elements[i].value == ""){
+                        alert("Error: No "+information.elements[i].name);
+                        return;
+                    }
+                }
+                //Create the data that will be inserted into Mongo
+                var newUserId = getUserId();
+            }
+        </script>
+        <link rel="stylesheet" href="styles.css">
+
+    </head>
+    <body style="background-color: blue;">
+        <div class="menu" style="height: 350px">
+            <h1>Create Account</h1>
+            <div class="form">
+                <form id="information">
+                    <p>Email</p>
+                    <input type="text" id="email" name="Email">
+                    <p>Username</p>
+                    <input type="text" id="username" name="Username">
+                    <p>Password</p>
+                    <input type="text" id="password" name="Password">
+                    <br><br>
+                    <input class="submit" type="submit" value="Submit" onclick="createAccount()">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
