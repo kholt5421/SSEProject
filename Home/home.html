@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="index.js"></script>
+        <script>
+            function viewProfile(){
+                if(user.loggedIn == false){
+                    alert("You must be logged in to view your profile.");
+                    return;
+                }
+            }
+        </script>
+        <style>
+            div.menu{
+                width: 500px;
+                height: 300px;
+                text-align: center;
+                border: 10px solid black;
+                margin: auto;
+                float: center;
+                background-color: white;
+            }
+            button.selection{
+                width: 140px;
+                padding: 1%;
+                background-color: lime;
+                border: 2px solid black;
+            }
+        </style>
+    </head>
+    <body style="background-color: blue;">
+        <div class="menu">
+            <h1>Spoof Call and Malware Simulator<br>(SCAMS)</h1>
+            <button class="selection">Play</button><br>
+            <button class="selection">Login</button><br>
+            <button class="selection">Create Account</button><br>
+            <button class="selection">View Scoreboard</button><br>
+            <button class="selection" onclick="viewProfile()">View Profile</button><br>
+        </div>
+    </body>
+</html>
