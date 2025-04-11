@@ -21,8 +21,16 @@ button.selection{
     border: 2px solid black;
     margin: 2px;
 }
+button.function{
+    background-color: lime;
+    border: 2px solid black;
+    margin: 2px; 
+}
 input.submit{
     background-color: lime;
     border: 2px solid black;
     margin: 2px; 
+}
+div.score{
+    float: left;
 }

@@ -3,5 +3,8 @@
 //User Information
 var loggedIn = false;
 var userId = null;
-var userName = null;
-var password = null;
+var userData = [
+    null, //Username
+    null, //Email
+    null //Password
+]

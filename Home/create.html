@@ -5,7 +5,7 @@
         <script src="../DatabaseFiles/MongoConnections.js"></script>
         <script>
             function createAccount(){
-                //Get data from form
+                //Get data from the form
                 var information = document.getElementById("information");
                 //Make sure the user filled out every field
                 for(let i = 0; i < 3; i++){
@@ -15,22 +15,63 @@
                         return;
                     }
                 }
+                //Make sure the user doesn't already have an account
+                var data = {
+                    email: {$eq: information.elements[1].value},
+                }
+                //Query mongo database
+                retrieve(data).then((result) => {
+                    if(result.length > 0){ //If data exists with that email, it means that the user already has an account
+                        alert("Error: Account already exists");
+                        return;
+                    }
+                });
+                //Make sure the username isn't already taken
+                data = {
+                    username: {$eq: information.elements[0].value}
+                };
+                //Query mongo database
+                retrieve(data).then((result) => {
+                    if(result.length > 0){ //If data exists with that username, it means that username is already taken
+                        alert("Error: Username already taken");
+                        return;
+                    }
+                });
                 //Create the data that will be inserted into Mongo
-                var newUserId = getUserId();
+                //Create the user's user_id
+                var newUserId = null; 
+                getUserId().then((id) => { newUserId = id; });
+                //Create document data
+                data = {
+                    user_id: newUserId, 
+                    username: information.elements[0].value, 
+                    email: information.elements[1].value, 
+                    password: information.elements[2].value, 
+                    scores: []
+                };
+                //Insert document
+                insert(data).then(() => {});
+                //Update index data
+                loggedIn = true;
+                userId = newUserId;
+                for(let i = 0; i < 3; i++){
+                    userData[i] = information.elements[i].value;
+                }
+                //Go to profile
+                window.location.href = "profile.html";
             }
         </script>
         <link rel="stylesheet" href="styles.css">
-
     </head>
     <body style="background-color: blue;">
         <div class="menu" style="height: 350px">
             <h1>Create Account</h1>
             <div class="form">
-                <form id="information">
-                    <p>Email</p>
-                    <input type="text" id="email" name="Email">
+                <form id="information" name="information">
                     <p>Username</p>
                     <input type="text" id="username" name="Username">
+                    <p>Email</p>
+                    <input type="text" id="email" name="Email">
                     <p>Password</p>
                     <input type="text" id="password" name="Password">
                     <br><br>
