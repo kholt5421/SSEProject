@@ -33,7 +33,7 @@ const options = {
     const jsonData = JSON.parse(fileContent);
 
     console.log('File content parsed:', jsonData)
-    console.log('File content length: ${JSON.stringify(jsonData).length}')
+    console.log(`File content length: ${JSON.stringify(jsonData).length}`)
 
     const document = {
       content: jsonData,
