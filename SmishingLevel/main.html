@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script id="2dVertexShader" type="notjs">
+            attribute vec4 a_position;
+            attribute vec3 a_color;
+            varying vec3 fragColor;
+            void main(){
+                gl_Position = a_position;
+                fragColor = a_color;
+                gl_PointSize = 10.0;
+            }
+        </script>
+        <script id="2dFragmentShader" type="notjs">
+            precision mediump float;
+            varying vec3 fragColor;
+            void main(){
+                gl_FragColor = vec4(fragColor,1);
+            }
+        </script>
+        <script src="classes.js"></script>
+        <script>
+            class main{
+                constructor(){
+                    //Add background image
+                    /*var background = new Image();
+                    background.src = "CRE_Jake StarRaptor-25bd9fb4_ful.png";
+                    background.onload = () =>{
+                        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+                    }*/
+                    this.webgl = new webgl();
+                    //Array to keep track of objects and counter
+                    this.points = [];
+                    this.playerPoints = [];
+                    this.objectCounter = 0;
+                }
+                addObject(type,prefab){
+                    var temp = new prefab; //Create Object
+                    //Set properties
+                    var id = "ID"+this.objectCounter
+                    temp.id = id;
+                    this.objectCounter++;
+                    temp.prefab = prefab;
+                    //Add to proper array
+                    if(type == 0){
+                        this.points[id] = temp;
+                    }else{
+                        this.playerPoints[id] = temp;
+                    }
+                    //Return new object(just in case)
+                    return temp;
+                }
+                removeObject(id){
+                    if(id in this.points){
+                        delete this.points[i];
+                    }
+                    if(id in this.playerPoints){
+                        delete this.playerPoints[i];
+                    }
+                }
+                addPlayerPoint(event){
+                    //Calculate point on canvas where click happened
+                    var clickX = event.clientX;
+                    var clickY = event.clientY;
+                    var rect = canvas.getBoundingClientRect();
+                    var realX = clickX - rect.left;
+                    var realY = clickY - rect.top;
+                    var x = -1 + 2*(realX/canvas.width);
+                    var y = -1 + 2*((canvas.height - realY)/canvas.height);
+                    //Add Point, set coordinates, and render all objects
+                    var newPoint = mymain.addObject(1,playerPoint);
+                    newPoint.addPoint(x,y,0);
+                    this.renderAll();
+                }
+                removePlayerPoint(event){
+                    if(this.playerPoints > 0){
+                        delete this.playerPoints[this.playerPoints.length-1];
+                    }
+                }
+                renderAll(){
+                    for(var i in this.playerPoints){
+                        this.playerPoints[i].render(this.webgl.program);
+                    }
+                }
+
+                static leftClick(event){
+                    mymain.addPlayerPoint(event);
+                }
+                static rightClick(event){
+                    mymain.removePlayerPoint(event);
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="../styles.css">
+    </head>
+    <body>
+        <div style="text-align: center;">
+            <canvas id="canvas" width="600" height="600">
+                YOUR BROWSER DOES NOT SUPPORT CANVAS
+            </canvas>
+            <script>
+                var canvas = document.getElementById("canvas");
+                //var ctx = canvas.getContext("2d");
+                var gl = canvas.getContext("webgl");
+                var mymain = new main;
+    
+                canvas.addEventListener("click", main.leftClick);
+                canvas.addEventListener("contextmenu",main.rightClick);
+            </script>
+        </div>
+    </body>
+</html>
+<!--
+    References:
+    https://www.proofpoint.com/us/threat-reference/smishing
+    https://digital.va.gov/cyber-spot/smish-smish-dont-get-phished/
+    https://business.bofa.com/en-us/content/what-is-smishing-how-to-prevent-it.html
+    https://www.fcc.gov/avoid-temptation-smishing-scams
+-->
