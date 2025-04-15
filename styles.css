@@ -34,3 +34,10 @@ input.submit{
 div.score{
     float: left;
 }
+body{
+    background-color: blue;
+}
+canvas{
+    border: 1px solid black;
+    background-color: white;
+}
