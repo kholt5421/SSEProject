@@ -188,9 +188,6 @@ class main{
                 this.realPoints[i].render(this.webgl.program);
             }
         }
-        for(var i in this.realPoints){
-            this.realPoints[i].render(this.webgl.program);
-        }
         for(let i = 0; i < this.playerPoints.length; i++){
             this.playerPoints[i].render(this.webgl.program);
         }
