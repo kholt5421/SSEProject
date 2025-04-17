@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../user.js"></script>
+        <script src="../index.html"></script>
         <script src="../DatabaseFiles/MongoConnections.js"></script>
         <script>
             function createAccount(){
@@ -51,12 +51,14 @@
                 };
                 //Insert document
                 insert(data).then(() => {});
-                //Update index data
-                loggedIn = true;
-                userId = newUserId;
+                //Update session storage
+                sessionStorage.setItem("loggedIn",JSON.stringify(true));
+                sessionStorage.setItem("userId",JSON.stringify(newUserId));
+                var userdata = [];
                 for(let i = 0; i < 3; i++){
                     userData[i] = information.elements[i].value;
                 }
+                sessionStorage.setItem("userData",JSON.stringify(userData));
                 //Go to profile
                 window.location.href = "profile.html";
             }

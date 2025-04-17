@@ -2,6 +2,23 @@
 <html lang="en">
     <head>
         <script>
+            //Variables that will likely be needed to be accessed by the entire program are stored in local storage here
+
+            //User Information
+            sessionStorage.setItem("loggedIn",JSON.stringify(false)); //User does not start logged in
+            //As such, none of their data exists yet
+            sessionStorage.setItem("userId",JSON.stringify(null));
+            sessionStorage.setItem("userData",JSON.stringify(
+                [
+                    null, //Username
+                    null, //Email
+                    null //Password
+                ]
+            ));
+
+            sessionStorage.setItem("currentScore",JSON.stringify(0)); //User's score for this run
+            sessionStorage.setItem("level1Stage",JSON.stringify(0)); //User's stage on level 1(0 is the beginning of level 1)
+            
             //Take the user to the homepage
             window.location.href = "Home/home.html";
         </script>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="../user.js"></script>
+        <script src="../index.html"></script>
         <script src="../DatabaseFiles/MongoConnections.js"></script>
         <script>
             function login(){
@@ -24,12 +24,14 @@
                 //Check to see if data is in database
                 retrieve(data).then((result) =>{
                     if(retrieved.length > 0){ //If there was data returned, it means that the account exists
-                        //Update index data
-                        loggedIn = true;
-                        userId = result[0].user_id;
+                        //Update session storage
+                        sessionStorage.setItem("loggedIn",JSON.stringify(true));
+                        sessionStorage.setItem("userId",JSON.stringify(result[0].user_id));
+                        var userData = [];
                         userData[0] = result[0].username;
                         userData[1] = result[0].email;
                         userData[2] = result[0].password;
+                        sessionStorage.setItem("userData",JSON.stringify(userData));
                         //Go to profile
                         window.location.href = "profile.html";
                     }else{ //If no data was returned, it means the account does not exist

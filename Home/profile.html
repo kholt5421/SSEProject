@@ -1,7 +1,7 @@
 <!DOCTYPE = html>
 <html lang="en">
     <head>
-        <script src="../user.js"></script>
+        <script src="../index.html"></script>
         <script src="../DatabaseFiles/MongoConnections.js"></script>
         <script>
             function makeProfile(){
@@ -30,11 +30,9 @@
             }
             function returnHome(loggingOut){
                 if(loggingOut){
-                    loggedIn = false;
-                    userId = null;
-                    userName = null;
-                    password = null;
-                    email = null;
+                    sessionStorage.setItem("loggedIn",JSON.stringify(false));
+                    sessionStorage.setItem("userId",JSON.stringify(null));
+                    sessionStorage.setItem("userData",JSON.stringify([null,null,null]));
                 }
                 window.location.href = "home.html";
             }

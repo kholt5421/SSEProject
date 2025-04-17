@@ -37,7 +37,14 @@ div.score{
 body{
     background-color: blue;
 }
-canvas{
+canvas.forSmishing{
     border: 1px solid black;
     background-color: white;
+}
+button.submit{
+    width: 55px;
+    padding: 1%;
+    background-color: lime;
+    border: 2px solid black;
+    margin: 2px;
 }

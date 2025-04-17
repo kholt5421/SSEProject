@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="../user.js"></script>
+        <script src="../index.html"></script>
         <script src="../DatabaseFiles/MongoConnections.js"></script>
         <script>
             function edit(){
@@ -10,6 +10,7 @@
                 for(let i = 0; i < 3; i++){
                     //Get data from the form
                     var information = document.getElementById("information");
+                    var userData = JSON.parse(sessionStorage.getItem("userData"));
                     if(information.element[i].value == ""){
                         newUserInformation[i] = userData[i];
                     }else{
@@ -29,10 +30,11 @@
                 };
                 //Update mongo database
                 update(data,filter).then(() => {});
-                //Update index file
+                //Update session storage
                 for(let i = 0; i < 3; i++){
                     userData[i] = newUserInformation[i];
                 }
+                sessionStorage.setItem("userData",JSON.stringify(userData));
                 //Return to the profile page
                 window.location.href = "profile.html";
             }
