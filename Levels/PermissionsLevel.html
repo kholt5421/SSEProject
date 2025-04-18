@@ -162,7 +162,8 @@
         });
 		feedback += `</ul><p>${app.explanation}</p></li>`;
       });
-      feedback += `</ul><p>Your Score: ${score}/${total}</p>`;
+      feedback += `</ul><p>Your Score: ${score}/${total}</p>
+	  <button class="selection" onclick="window.location.href='menu.html'">Save and Quit</button>`;
       document.getElementById("result").innerHTML = feedback;
     }
 
