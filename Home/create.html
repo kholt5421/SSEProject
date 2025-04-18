@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../index.html"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                var information = doucment.getElementById("information");
+                information.addEventListener("submit", async(event) =>{
+                    event.preventDefault();
+                    //Check to make sure the user filled out all required sections
+                    //Get data from the form
+                    for(let i = 0; i < 3; i++){
+                        if(information.elements[i].value == ""){ //If they missed a section, tell them
+                            alert("Error: Missing "+this.information.element[i].name);
+                            return;
+                        }
+                    }
+                    //If all was well, create a mongo document
+                    var data = {
+                        username: information.elements[0].value,
+                        email: information.elements[1].value,
+                        password: information.elements[2].value
+                    };
+                    //Try to insert the data into mongo
+                    try{
+                        var response = await fetch("/createAccount",{
+                            method:"POST",
+                            headers:{
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(data),
+                        });
+                        //Get result
+                        var result = await response.text();
+                        if(result == "Sucess"){
+                            sessionStorage.setItem("userData",[data.username,data.email,data.password]);
+                            window.location.href = "profile.html";
+                        }
+                    }catch(Error){
+                        console.log(Error);
+                    }    
+                })
+            });
+        </script>
+        <link rel="stylesheet" href="../styles.css">
+    </head>
+    <body>
+        <div class="menu" style="height: 350px">
+            <h1>Create Account</h1>
+            <div class="form">
+                <form id="information" name="information" method="post">
+                    <p>Username</p>
+                    <input type="text" id="username" name="Username">
+                    <p>Email</p>
+                    <input type="text" id="email" name="Email">
+                    <p>Password</p>
+                    <input type="password" id="password" name="Password">
+                    <br><br>
+                    <input class="submit" type="submit" value="Submit" onclick="createAccount()">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

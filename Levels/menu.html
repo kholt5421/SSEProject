@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="../index.html"></script>
+        <script>
+            function startSmishingLevel(){
+                var level1Stage = JSON.parse(sessionStorage.getItem("level1Stage"));
+                if(level1Stage == 0){ //If this is the user's first time playing the level, go to the beginning
+                    window.location.href = "SmishingLevel/menu.html";
+                }else{ //If it is not, go back to where they left off
+                    window.location.href = "SmishingLevel/stage"+level1Stage+".html";
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="../styles.css">
+    </head>
+    <body>
+        <div class="menu">
+            <h1>Level Select</h1>
+            <button class="selection" onclick="startSmishingLevel()">Smishing Level</button><br>
+            <button class="selection" onclick="window.location.href = 'PermissionsLevel.html'">App Permissions Level</button><br>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../index.html"></script>
+        <script src="../DatabaseFiles/MongoConnections.js"></script>
+        <script>
+            function login(){
+                //Get data from the form
+                var information = document.getElementById("information");
+                //Make sure the user filled out every field
+                for(let i = 0; i < 2; i++){
+                    //If they didn't fill out the form, tell the user and return
+                    if(information.elements[i].value == ""){
+                        alert("Error: No "+information.elements[i].name);
+                        return;
+                    }
+                }
+                //Make sure the user is a real user
+                //Make mongo document data
+                var data = {
+                    username: {$eq: information.elements[0].value},
+                    password: {$eq: information.elements[1].value}
+                };
+                //Check to see if data is in database
+                retrieve(data).then((result) =>{
+                    if(retrieved.length > 0){ //If there was data returned, it means that the account exists
+                        //Update session storage
+                        sessionStorage.setItem("loggedIn",JSON.stringify(true));
+                        sessionStorage.setItem("userId",JSON.stringify(result[0].user_id));
+                        var userData = [];
+                        userData[0] = result[0].username;
+                        userData[1] = result[0].email;
+                        userData[2] = result[0].password;
+                        sessionStorage.setItem("userData",JSON.stringify(userData));
+                        //Go to profile
+                        window.location.href = "profile.html";
+                    }else{ //If no data was returned, it means the account does not exist
+                        alert("Error: Invalid Login");
+                        return;
+                    }
+                });
+            }
+        </script>
+        <link rel="stylesheet" href="../styles.css">
+    </head>
+    <body>
+        <div class="menu">
+            <h1>Create Account</h1>
+            <div class="form">
+                <form id="information" name="information">
+                    <p>Username</p>
+                    <input type="text" id="username" name="username">
+                    <p>Password</p>
+                    <input type="password" id="password" name="password">
+                    <br><br>
+                    <input class="submit" type="submit" value="Submit" onclick="login()">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
