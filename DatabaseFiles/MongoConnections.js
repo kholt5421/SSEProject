@@ -4,19 +4,18 @@ import {MongoClient} from "mongodb";
 import {fileURLToPath} from 'url';
 import path from 'path';
 
-//Allow the program to pass multiple things into mongo post functions
+//Create an express application to handle communications between the front end and back end
 const app = express();
-app.use(express.urlencoded({ extended: true }));
-//Allow the program to interact with files in the Home directory
+//Allow the app to pass json and urlencoded data into the mongo functions
+app.use(express.json());
+//app.use(express.urlencoded({ extended: true }));
+//Allow the app to interact with files in the main directory
 const file = fileURLToPath(import.meta.url);
 const directory = path.dirname(file);
 app.use(express.static(path.join(directory, "..")));
 
-app.get("/createAccount", (request, response) => {
-  response.sendFile(path.join(directory, "Home", "create.html"));
-});
 app.get("/", (request, response) => {
-  response.sendFile(path.join(directory, "..", "index.html"));
+  response.sendFile(path.join(directory, "index.html"));
 });
 
 const uri = "mongodb+srv://SSEconnection:RememberThis@cluster0.3jlg2.mongodb.net/";
@@ -29,7 +28,7 @@ const client = new MongoClient(uri);
 var dataBase = "SSE_MobileSecurityGame";
 var dbCollection = "Testing"
 
-//Create an account using data
+//Create an account using data sent in via a request(response will be empty)
 app.post("/createAccount", async(request, response) => {
   var data = request.body; //Get user data
   try{
@@ -49,33 +48,28 @@ app.post("/createAccount", async(request, response) => {
     const collection = db.collection(dbCollection);
 
     //Create the primary key
-    //Start by retrieving the highest user_id
-    //Create document
-    var document = {};
-    //Use document to retrieve data from MongoDB
-    //var result = await collection.find(document).sort({user_id: 1}).toArray();
-    var result = await collection.countDocuments();
+    var result = await collection.countDocuments(); //Get the count of how may users exist in database
     //Check to make sure the user Ids were retrieved
     if(result.acknowledged){
       throw new Error("Error: Failed to get new UserId.");
     }
-    //Create the new user_id
-    var newUserId = result + 1;
+    var newUserId = result + 1; //Create the new user_id by adding one to the count
+
     //Insert new data
-    //Create document
-    document = {
+    //Create a new document
+    var document = {
       user_id: newUserId,
       username: data.Username,
       email: data.Email,
       password: data.Password,
+      highestScore: 0,
       scores: []
-    }
-    //Insert the data
+    };
+    //Insert the document data into the database
     result = await collection.insertOne(document);
     //Make sure it worked
     if (result.acknowledged) {
       console.log(`Data sucessfully inserted`);
-      response.send("Sucess");
     } else {
       throw new Error(`Failed to insert data`);
     }
@@ -83,7 +77,7 @@ app.post("/createAccount", async(request, response) => {
   } catch (err) {
     console.error(`[Error] ${err}`);
   } finally {
-    //Return document and close Mongo
+    //Close Mongo
     await client.close();
   }
 })
