@@ -241,16 +241,26 @@ class main{
             text = "You found "+this.pointsFound+" correct things, earning you "+this.pointsFound+" points towards your total score!";
         }
         alert(text+"\n"+this.takeaway);
-        //Update the player's score and move them on to the next stage
+        //Update the player's score
         var currentScore = JSON.parse(sessionStorage.getItem("currentScore")) + this.pointsFound;
         sessionStorage.setItem("currentScore", JSON.stringify(currentScore));
+        //If that was the final stage, send them back the menu
+        if(stage == 10){
+            window.location.href='../menu.html';
+        }
+        //Else, send them to the next stage
         var level1Stage = stage + 1;
+<<<<<<< HEAD:Game/SmishingLevel/classes.js
         sessionStorage.setItem("level1Stage", JSON.stringify(level1Stage));
         if(stage == 10){
             window.location.href = "../menu.html";
         }else{
             window.location.href = 'stage'+level1Stage+'.html';   
         }
+=======
+        sessionStorage.setItem("level1Stage", JSON.stringify(level1Stage)); //Store the stage in case they want to save and quit
+        window.location.href = 'stage'+level1Stage+'.html';
+>>>>>>> ac1ad44487e439228633b1263b59302e5e4c1d09:Levels/SmishingLevel/classes.js
     }
 
     //Static functions for handling when the player left clicks and right clicks
