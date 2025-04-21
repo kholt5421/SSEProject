@@ -87,6 +87,8 @@
 						this.score.innerText = "Your score: " + this.correctAnsNum + "/" + this.maxScore;
 						this.goButton.innerText = "You finished all the levels!";
 						this.goButton.onclick = "";
+						document.getElementById("button").style.display = "none";
+						document.getElementById("finishedDisplay").innerText = "You finished all the levels!";
 						this.gameFinish = true;
 					}else if (!this.gameFinish){
 						this.score.innerText = "Your score: " + this.correctAnsNum + "/" + this.maxScore;
@@ -105,6 +107,21 @@
 					if(this.mail[this.mailCurrentIndex].checkCorrect(i, this.playerAns[i])){
 						this.correctAnsNum++;
 						levelCor++;
+						if(i==0){
+							document.getElementById("companyClaim").style.color = "green";
+						}else if(i==1){
+							document.getElementById("personalInfo").style.color = "green";
+						}else{
+							document.getElementById("urgentClaim").style.color = "green";
+						}
+					}else{
+						if(i==0){
+							document.getElementById("companyClaim").style.color = "red";
+						}else if(i==1){
+							document.getElementById("personalInfo").style.color = "red";
+						}else{
+							document.getElementById("urgentClaim").style.color = "red";
+						}
 					}
 				}
 				console.log(this.correctAnsNum);
@@ -136,6 +153,9 @@
 			
 			updateScreen(){
 				console.log("updateScreen runs");
+				document.getElementById("companyClaim").style.color = "black";
+				document.getElementById("personalInfo").style.color = "black";
+				document.getElementById("urgentClaim").style.color = "black";
 				this.goButton.innerText = "Submit Answers";
 				this.goButton.onclick = () => this.submitAnswers();
 				this.currentCall = this.mail[this.mailCurrentIndex];
@@ -154,39 +174,48 @@
 	
 	</HEAD>
 	<BODY>		
+		<center>
 		<div style = "width: 500px; height: 450px; border: 10px solid #000; background: lightgrey;">
 			<div id = "callerID" style = "border: 1px solid #000; font-size:30px;text-align:center"></div>
-			<div id = "transcript" style = "width: 498px; height: 500px; border: 1px solid #000; font-size:25px;">
+			<div id = "transcript" style = "width: 498px; height: 500px; border: 2px solid #000; font-size:25px;">
 				
 			</div>
-		</div>
+		</div></center>
 		<!-- Answer selections below -->
+		<center>
 		<div style = "width: 500px; border: 10px solid #000; background: white;">
-			<div style = "border: 1px solid #000;">
+			<div id = "companyClaim" style = "border: 1px solid #000;">
+				<center><b>Suspicious claim to be a company</b><br>
 				<input type = "radio" id = "OptionSel1" name = "company" onClick = "m.changeVal(0,1)">
-				<label for = "OptionSel1">Suspicious claim to be a company</label>
+				<label for = "OptionSel1">Yes</label>
 				<input type = "radio" id = "OptionSel1" name ="company" onClick = "m.changeVal(0,0)">
-				<label for = "OptionSel1">Nothing Wrong</label>
+				<label for = "OptionSel1">No</label>
+				</center>
 			</div>
-			<div style = "border: 1px solid #000;">
+			<div id = "personalInfo" style = "border: 1px solid #000;">
+				<center><b>Asks for personal information</b><br>
 				<input type = "radio" id = "OptionSel1" name = "personalInfo" onClick = "m.changeVal(1,1)">
-				<label for = "OptionSel1">Request for personal information</label>
+				<label for = "OptionSel1">Yes</label>
 				<input type = "radio" id = "OptionSel1" name = "personalInfo" onClick = "m.changeVal(1,0)">
-				<label for = "OptionSel1">Nothing Wrong</label>
+				<label for = "OptionSel1">No</label>
+				</center>
 			</div>
-			<div style = "border: 1px solid #000;">
+			<div id = "urgentClaim" style = "border: 1px solid #000;">
+				<center><b>Details it as an urgent matter</b><br>
 				<input type = "radio" id = "OptionSel1" name = "urgent"onClick = "m.changeVal(2,1)">
-				<label for = "OptionSel1">Details as an urgent matter</label>
+				<label for = "OptionSel1">Yes</label>
 				<input type = "radio" id = "OptionSel1" name = "urgent"onClick = "m.changeVal(2,0)">
-				<label for = "OptionSel1">Nothing Wrong</label>
+				<label for = "OptionSel1">No</label>
+				</center>
 			</div>
 			<div style = "border: 1px solid #000;">
 				<div id = "results" style = "height:auto;"><br></div>
+				<div id = "finishedDisplay" style = "font-size:25px;text-align:center"></div>
 				<button id = "button" class = "selection" onClick = "m.submitAnswers()">Submit Answers</button><br>
-				<BUTTON class = "selection" onclick = "window.location.href = '../menu.html'">Return to Level Screen</BUTTON>
+				<BUTTON class = "selection" onclick = "window.location.href = 'Vishing.html'">Return to Selection Screen</BUTTON>
 			</div>
 			<div id = "score" style = "height:auto; border: 1px solid #000;"></div>
-		</div>
+		</div></center>
 		
 		<SCRIPT>
 			var m = new main();
