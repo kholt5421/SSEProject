@@ -1,8 +1,0 @@
-{
-    "user_id" : 1234,
-    "username" : "fakeuser",
-    "email" : "testing@sample.com",
-    "password" : "blabla",
-    "question" : "Birthday Date Example",
-    "scores" : ["123", "321"]
-}

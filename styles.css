@@ -48,3 +48,8 @@ button.submit{
     border: 2px solid black;
     margin: 2px;
 }
+div.column{
+    width: 55px;
+    float: left;
+    text-align: center;
+}
