@@ -60,6 +60,8 @@
         <p id="explanation5"></p>
         <p id="explanation6"></p> 
     </div>
+
+    <p id="totalScore" style="font-weight:bolder";></p>
     
 
     <script>
@@ -121,9 +123,11 @@
         }
 
         function submit(){
+            //gathering chosen answers
             const checkboxes = document.querySelectorAll('input[name="attack"]:checked');
             const selectedAttacks = Array.from(checkboxes).map(checkbox => checkbox.value);
 
+            //containing correct answers in an array
             const correctAttacks = ['DataTheft','MalwareInstalation', 'MultiDeviceAttack', 'DisablingAttack'];
             
             let correctCount = 0;
@@ -142,22 +146,25 @@
                     
             let feedbackMsg = `You got ${correctCount} out of 4 answers correct! You earned ${currentScore} point(s).`;
 
-            
-
             document.getElementById("feedback2").innerHTML = feedbackMsg;
 
-        //show explainations
-        document.getElementById("explanation1").innerText = follow_upQ.explanation1;
-        document.getElementById("explanation2").innerText = follow_upQ.explanation2;
-        document.getElementById("explanation3").innerText = follow_upQ.explanation3;
-        document.getElementById("explanation4").innerText = follow_upQ.explanation4;
-        document.getElementById("explanation5").innerText = follow_upQ.explanation5;
-        document.getElementById("explanation6").innerText = follow_upQ.explanation6;
+            //show explainations
+            document.getElementById("explanation1").innerText = follow_upQ.explanation1;
+            document.getElementById("explanation2").innerText = follow_upQ.explanation2;
+            document.getElementById("explanation3").innerText = follow_upQ.explanation3;
+            document.getElementById("explanation4").innerText = follow_upQ.explanation4;
+            document.getElementById("explanation5").innerText = follow_upQ.explanation5;
+            document.getElementById("explanation6").innerText = follow_upQ.explanation6;
 
-        document.getElementById("follow-upAnswers").style.display = "block";
+            document.getElementById("follow-upAnswers").style.display = "block";
+
+            //display total score
+            let totalScoreMsg = `Total Score: ${score}`;
+            document.getElementById("totalScore").innerHTML = totalScoreMsg;
         }
         
         displayQuestion1(firstQuestion);
+
 
     </script>
 
