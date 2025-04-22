@@ -149,6 +149,7 @@ For this level, you are tasked to give only the correct permissions to the apps 
     }
 	// Gets the users choices and compares them to the correct answers and displays the ones they got right/wrong along with an explanation for that app
     function submitChoices() {
+	  document.querySelector("button").style.display = "none";
       const checkboxes = document.querySelectorAll("input[type=checkbox]");
       const userChoices = {};
       checkboxes.forEach(cb => {
@@ -183,8 +184,10 @@ For this level, you are tasked to give only the correct permissions to the apps 
 	    results.className = "app-container";
 		results.innerHTML = feedback;
 	    resultsContainer.appendChild(results);
+		var currentScore = JSON.parse(sessionStorage.getItem("currentScore")) + score;
+        sessionStorage.setItem("currentScore", JSON.stringify(currentScore));
     }
-
+	
     createAppUI();
   </script>
 </body>
