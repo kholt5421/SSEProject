@@ -16,9 +16,9 @@
                         newUserInformation[i] = information.element[i].value; //Change that part of their information.
                     }
                 }
-                //Try to make sure the user doesn't already have an account using the email
+                //Try to make sure another user doesn't already have an account using the email
                 var data = { //Create mongo document
-                    email: information.elements[1].value,
+                    email: newUserInformation.elements[1].value,
                 };
                 try{
                     //Send a query along a post request to the backend
@@ -41,7 +41,7 @@
                 }
                 //Try to see if the username is already taken
                 data = { //Update mongo document
-                    username: information.elements[0].value,
+                    username: newUserInformation.elements[0].value,
                 };
                 try{
                     //Send a query along a post request to the backend
@@ -100,25 +100,27 @@
         <link rel="stylesheet" href="../styles.css">
     </head>
     <body>
-        <div class="menu" style="height: 430px">
+        <div class="menu" style="height: 450px">
             <h1>Edit Your Profile</h1>
             <div class="form">
                 <form id="newInformation">
                     <p id="username"></p>
-                    <p>New Username</p>
+                    <p>New Username:</p>
                     <input type="text" id="username" name="username">
                     <p id="email"></p>
                     <p>New Email:</p>
                     <input type="text" id="email" name="email">
                     <p id="password"></p>
-                    <p>New Password</p>
+                    <p>New Password:</p>
                     <input type="password" id="password" name="password">
                     <br><br>
                     <button class="submit" onclick="edit()">Submit</button>
+                    <button class="submit" onclick="window.location.href = 'profile.html'">Cancel</button>
                 </form>
             </div>
         </div>
         <script>
+            var userData = JSON.parse(sessionStorage.getItem("userData"));
             document.getElementById("username").innerHTML = "Current Username: "+userData[0];
             document.getElementById("email").innerHTML = "Current Email: "+userData[1];
             document.getElementById("password").innerHTML = "Current Password: "+userData[2];
