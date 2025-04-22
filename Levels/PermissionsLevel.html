@@ -29,14 +29,10 @@
   </style>
 </head>
 <body>
-  <h1>Settings/General/App Permissions</h1>
-  <h5>Whenever you open a new app on your phone, you have probably been given an alert box that asks you for 
-permissions on your location, camera, etc. Giving these permissions tends to be easy by pressing 1 button, 
-but have you ever thought about what the app was and how it relates to the permissions that you are giving them. 
-For this level, you are tasked to give only the correct permissions to the apps that are displayed.</h5>
+  <div id="title"></div>
   <div id="apps"></div>
   <button onclick="submitChoices()">Confirm Settings</button>
-  <div id="result"></div>
+  <div id="results"></div>
 
   <script>
 	// Whole code creates the basics of the game, but later will be updated to allow player to move to next level after 5/6 or higher score and stopwatch time saved for level onto their account
@@ -111,10 +107,23 @@ For this level, you are tasked to give only the correct permissions to the apps 
 		explanation: "The gallery keeps track of photos, but it does not require access to any other permissions to operate."
 	  }
     ];
+	
 	// Randomly selects 6 apps from the 11 to display
     const selectedApps = allApps.sort(() => 0.5 - Math.random()).slice(0, 6); // 6 is the number of apps tested, can be changed by changing the number
 	// Creates the container that the different app sections reside in
     function createAppUI() {
+		
+	//Title and Description into white box
+	const titleContainer = document.getElementById("title");
+	const title = document.createElement("div");
+    title.className = "app-container";
+    title.innerHTML = `<h1>Settings/General/App Permissions</h1>
+  <h5>Whenever you open a new app on your phone, you have probably been given an alert box that asks you for 
+permissions on your location, camera, etc. Giving these permissions tends to be easy by pressing 1 button, 
+but have you ever thought about what the app was and how it relates to the permissions that you are giving them? 
+For this level, you are tasked to give only the correct permissions to the apps that are displayed.</h5>`;
+	  titleContainer.appendChild(title);
+	
       const appsContainer = document.getElementById("apps");
       selectedApps.forEach((app, index) => {
         const div = document.createElement("div");
@@ -159,17 +168,21 @@ For this level, you are tasked to give only the correct permissions to the apps 
           const userValue = userChoices[i]?.[perm] || false;
           if (userValue === correct) {
             score++;
-            feedback += ` <span style="color: yellow">✓ ${perm}</span>`;
+            feedback += ` <span style="color: green">✓ ${perm}</span>`;
           } else {
             feedback += ` <span style="color: red">✗ ${perm}</span>`;
           }
         });
 		feedback += `</ul><p>${app.explanation}</p></li>`;
       });
-      feedback += `</ul><p>Your Score: ${score}/${total}</p>
+	        feedback += `</ul><p>Your Score: ${score}/${total}</p>
 	  <p>It is important to make sure that you know what information you are giving to your apps. Limit what you want to share to certain apps to better protect your data.</p>
 	  <button class="selection" onclick="window.location.href='menu.html'">Save and Quit</button>`;
-      document.getElementById("result").innerHTML = feedback;
+	  const resultsContainer = document.getElementById("results");
+	  	const results = document.createElement("div");
+	    results.className = "app-container";
+		results.innerHTML = feedback;
+	    resultsContainer.appendChild(results);
     }
 
     createAppUI();
