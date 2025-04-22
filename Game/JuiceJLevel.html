@@ -8,9 +8,13 @@
         body {
           font-family: Arial, sans-serif;
           padding: 20px;
-          background: #ffffff;
+          background: #0000ff;
         }
-        .question-container {
+        .main-container {
+          background: #ffffff;
+          padding: 75px;
+          border-radius: 10px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
           margin-bottom: 20px;
         }
         h2 {
@@ -27,6 +31,7 @@
     </style>
 </head>
 <body>
+    <div class="main-container">
 
     <div class="question-container">
         <h2 id="scenario"></h2>
@@ -62,7 +67,7 @@
     </div>
 
     <p id="totalScore" style="font-weight:bolder";></p>
-    
+    </div>
 
     <script>
         let score = 0;
@@ -73,7 +78,7 @@
             Yes: false,
             No: true
         },
-        explanation: "Attackers can use public charging stations to tamper with USB ports, leave malicious USB cables, or even modify the charging kiosk internally."
+        explanation: "Attackers can use public charging stations to tamper with USB ports, leave malicious USB cables, or even modify the charging kiosk internally. This is known as a Juice Jacking attack."
         };
 
         const follow_upQ = {
