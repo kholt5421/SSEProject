@@ -39,6 +39,7 @@
 
     <div id="follow-up" class="follow-up" style="display: none;">
         <p id="question2" style="font-size:1.2rem; font-weight:bold;"> What attacks can occur as a result of Juice Jacking?</p>
+        <p id="instruction" style="font-size:1.0rem; font-weight:100;"> (For every correct choice +1 point and for every incorrect choice -1 point)</p>
         <label><input type="checkbox" name="attack" value="DataTheft"> Data Theft</label><br>
         <label><input type="checkbox" name="attack" value="MalwareInstalation"> Malware Instalation</label><br>
         <label><input type="checkbox" name="attack" value="Spoofing"> Spoofing</label><br>
@@ -62,7 +63,7 @@
     
 
     <script>
-        
+        let score = 0;
         const firstQuestion = {
             scenario: "Your phone is at 5% battery charge and you are stuck at a train station with no personal charger.",
             question: "Do you want to charge your phone at a public USB charging station?",
@@ -109,7 +110,11 @@
         // Function to check the answer and show feedback
         function checkAnswer(question, choice) {
             const isCorrect = question.choices[choice];
-            const feedback = isCorrect ? "✅ Correct!" : "❌ Incorrect.";
+            const feedback = isCorrect ? "✅ Correct! (+1 Point)" : "❌ Incorrect.";
+            if (isCorrect == true){
+                score++;
+            }
+            
             document.getElementById("feedback").innerHTML = `${feedback}<br><br>${question.explanation}`;
 
             document.getElementById("follow-up").style.display = "block";
@@ -120,20 +125,26 @@
             const selectedAttacks = Array.from(checkboxes).map(checkbox => checkbox.value);
 
             const correctAttacks = ['DataTheft','MalwareInstalation', 'MultiDeviceAttack', 'DisablingAttack'];
-                                       
-                    
-            let feedbackMsg = "✅ Correct!";
-            let isCorrect = true;
+            
+            let correctCount = 0;
+            let currentScore = 0;
+            selectedAttacks.forEach(attack => {
+                if (correctAttacks.includes(attack)){
+                    currentScore++;
+                    correctCount++;
+                }
+                else{
+                    currentScore--;
+                }
+            })
 
-            if(selectedAttacks.length != correctAttacks.length ||
-        !correctAttacks.every(attack => selectedAttacks.includes(attack)))  {
-                isCorrect = false;
-                feedbackMsg = "❌ Incorrect.";
-            }
+            score += currentScore;
+                    
+            let feedbackMsg = `You got ${correctCount} out of 4 answers correct! You earned ${currentScore} point(s).`;
 
             
 
-        document.getElementById("feedback2").innerHTML = feedbackMsg;
+            document.getElementById("feedback2").innerHTML = feedbackMsg;
 
         //show explainations
         document.getElementById("explanation1").innerText = follow_upQ.explanation1;
