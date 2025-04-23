@@ -164,8 +164,12 @@
             document.getElementById("follow-upAnswers").style.display = "block";
 
             //display total score
-            let totalScoreMsg = `Total Score: ${score}`;
+            let totalScoreMsg = `Total Score: ${score}<br>
+			<button class="selection" onclick="window.location.href='menu.html'">Save and Quit</button>`;;
             document.getElementById("totalScore").innerHTML = totalScoreMsg;
+			var playerCurrentScore = JSON.parse(sessionStorage.getItem("currentScore"));
+			playerCurrentScore += score;
+			sessionStorage.setItem("currentScore",JSON.stringify(playerCurrentScore));
         }
         
         displayQuestion1(firstQuestion);
