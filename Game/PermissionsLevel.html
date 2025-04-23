@@ -112,10 +112,6 @@
     const selectedApps = allApps.sort(() => 0.5 - Math.random()).slice(0, 6); // 6 is the number of apps tested, can be changed by changing the number
 	// Creates the container that the different app sections reside in
     function createAppUI() {
-<<<<<<< HEAD:Game/PermissionsLevel.html
-=======
-		
->>>>>>> d92c689e088c406e204d4ac88e900764305f7bb9:Levels/PermissionsLevel.html
 	//Title and Description into white box
 	const titleContainer = document.getElementById("title");
 	const title = document.createElement("div");
@@ -179,29 +175,16 @@ For this level, you are tasked to give only the correct permissions to the apps 
         });
 		feedback += `</ul><p>${app.explanation}</p></li>`;
       });
-<<<<<<< HEAD:Game/PermissionsLevel.html
-      var currentScore = JSON.parse(sessionStorage.getItem("currentScore"));
-      currentScore += score;
-      sessionStorage.setItem("currentScore",JSON.stringify(currentScore));
-      feedback += `</ul><p>Your Score: ${score}/${total}</p>
-	  <p>It is important to make sure that you know what information you are giving to your apps. Limit what you want to share to certain apps to better protect your data.</p>
-	  <button class="selection" onclick="window.location.href='menu.html'">Save and Quit</button>`;
-      const resultsContainer = document.getElementById("results");
-=======
 	        feedback += `</ul><p>Your Score: ${score}/${total}</p>
 	  <p>It is important to make sure that you know what information you are giving to your apps. Limit what you want to share to certain apps to better protect your data.</p>
 	  <button class="selection" onclick="window.location.href='menu.html'">Save and Quit</button>`;
 	  const resultsContainer = document.getElementById("results");
->>>>>>> d92c689e088c406e204d4ac88e900764305f7bb9:Levels/PermissionsLevel.html
 	  	const results = document.createElement("div");
 	    results.className = "app-container";
 		results.innerHTML = feedback;
 	    resultsContainer.appendChild(results);
-<<<<<<< HEAD:Game/PermissionsLevel.html
-=======
 		var currentScore = JSON.parse(sessionStorage.getItem("currentScore")) + score;
         sessionStorage.setItem("currentScore", JSON.stringify(currentScore));
->>>>>>> d92c689e088c406e204d4ac88e900764305f7bb9:Levels/PermissionsLevel.html
     }
 	
     createAppUI();
