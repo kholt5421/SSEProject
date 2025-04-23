@@ -128,7 +128,7 @@ class main{
         this.end = false; //This stage has not ended
         //Update the stage number and add the player's current score to the screen
         document.getElementById("score").innerText = "Current Score: "+JSON.parse(sessionStorage.getItem("currentScore"));
-        document.getElementById("stage").innerText = "Message "+JSON.parse(sessionStorage.getItem("level1Stage"))+"/10";
+        document.getElementById("stage").innerText = "Message "+JSON.parse(sessionStorage.getItem("level1Stage"))+"/9";
         //Add Real Points to Real Points array
         for(let i = 0; i < points.length; i += 6){
             this.addObject(0,realPoint,[points[i],points[i+1],points[i+2]],[points[i+3],points[i+4],points[i+5]]);
@@ -245,22 +245,13 @@ class main{
         var currentScore = JSON.parse(sessionStorage.getItem("currentScore")) + this.pointsFound;
         sessionStorage.setItem("currentScore", JSON.stringify(currentScore));
         //If that was the final stage, send them back the menu
-        if(stage == 10){
+        if(stage == 9){
             window.location.href='../menu.html';
         }
         //Else, send them to the next stage
         var level1Stage = stage + 1;
-<<<<<<< HEAD:Game/SmishingLevel/classes.js
         sessionStorage.setItem("level1Stage", JSON.stringify(level1Stage));
-        if(stage == 10){
-            window.location.href = "../menu.html";
-        }else{
-            window.location.href = 'stage'+level1Stage+'.html';   
-        }
-=======
-        sessionStorage.setItem("level1Stage", JSON.stringify(level1Stage)); //Store the stage in case they want to save and quit
-        window.location.href = 'stage'+level1Stage+'.html';
->>>>>>> ac1ad44487e439228633b1263b59302e5e4c1d09:Levels/SmishingLevel/classes.js
+        window.location.href = 'stage'+level1Stage+'.html';   
     }
 
     //Static functions for handling when the player left clicks and right clicks
