@@ -22,7 +22,7 @@
                 };
                 try{
                     //Send a query along a post request to the backend
-                    var query = await fetch("/retrieve",{
+                    var query = await fetch("/checkEmail",{
                         method:"POST",
                         headers:{
                             "Content-Type": "application/json",
@@ -45,7 +45,7 @@
                 };
                 try{
                     //Send a query along a post request to the backend
-                    var query = await fetch("/retrieve",{
+                    var query = await fetch("/checkUsername",{
                         method:"POST",
                         headers:{
                             "Content-Type": "application/json",
@@ -78,7 +78,7 @@
                 }
                 try{
                     //Send a query along a post request to the backend
-                    var query = await fetch("/createAccount",{
+                    var query = await fetch("/update",{
                         method:"POST",
                         headers:{
                             "Content-Type": "application/json"
