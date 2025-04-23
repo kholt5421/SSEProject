@@ -247,11 +247,12 @@ class main{
         //If that was the final stage, send them back the menu
         if(stage == 9){
             window.location.href='../menu.html';
+        }else{
+            //Else, send them to the next stage
+            var level1Stage = stage + 1;
+            sessionStorage.setItem("level1Stage", JSON.stringify(level1Stage));
+            window.location.href = 'stage'+level1Stage+'.html';   
         }
-        //Else, send them to the next stage
-        var level1Stage = stage + 1;
-        sessionStorage.setItem("level1Stage", JSON.stringify(level1Stage));
-        window.location.href = 'stage'+level1Stage+'.html';   
     }
 
     //Static functions for handling when the player left clicks and right clicks
